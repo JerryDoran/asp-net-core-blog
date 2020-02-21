@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Blog.Data;
 using Blog.Data.Repository;
-using Blog.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +22,8 @@ namespace Blog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IRepository>(options => options.UseSqlServer(_config["DefaultConnection"]));
-            services.AddTransient(typeof(IRepository<Post>), typeof(PostRepository));
-            services.AddTransient(typeof(IRepository<User>), typeof(UserRespository));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
+            services.AddTransient<IRepository, Repository>();           
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

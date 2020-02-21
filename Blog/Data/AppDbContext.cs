@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace Blog.Data
 {
-    public class IRepository : DbContext
+    public class AppDbContext : DbContext
     {
-        public IRepository(DbContextOptions<IRepository> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
 
         // Create a tables called 'Posts' and 'Users' and each record is a singel 'Post'
         public DbSet<Post> Posts { get; set; }
-        public DbSet<User> Users { get; set; }
     }
 }

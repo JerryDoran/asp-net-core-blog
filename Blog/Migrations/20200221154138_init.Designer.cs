@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.Migrations
 {
-    [DbContext(typeof(IRepository))]
-    [Migration("20200219171835_init")]
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20200221154138_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

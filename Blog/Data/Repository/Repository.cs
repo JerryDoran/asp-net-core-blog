@@ -6,38 +6,38 @@ using System.Threading.Tasks;
 
 namespace Blog.Data.Repository
 {
-    public class UserRespository : IRepository<User>
+    public class Repository : IRepository
     {
-        private IRepository _context;
+        private  AppDbContext _context;
 
-        public UserRespository(IRepository context)
+        public Repository(AppDbContext context)
         {
             _context = context;
         }
-
-        public void Add(User value)
+       
+        public Post GetPost(int id)
         {
-            _context.Users.Add(value);
+            return _context.Posts.FirstOrDefault(p => p.Id == id);
         }
 
-        public User Get(int id)
+        public List<Post> GetAllPosts()
         {
-            return _context.Users.FirstOrDefault(p => p.Id == id);
+            return _context.Posts.ToList();            
         }
 
-        public List<User> GetAll(int id)
+        public void AddPost(Post post)
         {
-            return _context.Users.ToList();
+            _context.Posts.Add(post);
         }
 
-        public void Remove(int id)
+        public void UpdatePost(Post post)
         {
-            _context.Users.Remove(Get(id));
+            _context.Posts.Update(post);
         }
 
-        public void Update(User value)
+        public void RemovePost(int id)
         {
-            _context.Users.Update(value);
+            _context.Posts.Remove(GetPost(id));
         }
 
         // This method actually makes the changes to the database.
@@ -49,5 +49,6 @@ namespace Blog.Data.Repository
             }
             return false;
         }
+
     }
 }
